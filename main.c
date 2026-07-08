@@ -32,3 +32,66 @@ void saveFinalReport(struct Student students[]);
 struct Student students[MAX_STUDENT];
 
 int loadFromFile(struct Student students[], int maxSize);
+
+
+//===========================
+//       Mengchheang
+//===========================
+
+void add_student(struct Student students[])
+{
+    int i, j, new_count;
+    float total;
+
+    printf("Enter number of students to add (1-%d): ", MAX_STUDENT - num_stu);
+    scanf("%d", &new_count);
+
+    while (new_count < 1 || new_count > MAX_STUDENT - num_stu)
+    {
+        printf("Invalid! Enter again: ");
+        scanf("%d", &new_count);
+    }
+
+    printf("Enter number of subjects (1-%d): ", MAX_SUBS);
+    scanf("%d", &num_sub);
+
+    while (num_sub < 1 || num_sub > MAX_SUBS)
+    {
+        printf("Invalid! Enter again: ");
+        scanf("%d", &num_sub);
+    }
+
+    for (i = num_stu; i < num_stu + new_count; i++)
+    {
+        total = 0;
+        printf("\n--- Student %d ---\n", i + 1);
+
+        printf("Enter ID: ");
+        scanf("%d", &students[i].id);
+
+        printf("Enter Name: ");
+        scanf(" %[^\n]", students[i].name);
+
+        for (j = 0; j < num_sub; j++)
+        {
+            printf("Enter mark for Subject %d: ", j + 1);
+            scanf("%f", &students[i].marks[j]);
+
+            while (students[i].marks[j] < 0 || students[i].marks[j] > 100)
+            {
+                printf("Invalid! Enter mark (0-100): ");
+                scanf("%f", &students[i].marks[j]);
+            }
+
+            total += students[i].marks[j];
+        }
+
+        students[i].total = total;
+        students[i].average = total / num_sub;
+        students[i].grade = getgrade(students[i].average);
+
+        printf("Average = %.2f\n", students[i].average);
+    }
+
+    num_stu += new_count;
+}
