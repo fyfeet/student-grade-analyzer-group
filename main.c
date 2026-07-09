@@ -200,3 +200,37 @@ void Allresults(struct Student students[])
                students[i].grade);
     }
 }
+
+
+//============================
+//          daslisha
+//============================
+void classstatistics(struct Student students[])
+{
+    if (num_stu == 0)
+    {
+        printf("No students yet.\n");
+        return;
+    }
+    float max_avg = students[0].average;
+    float min_avg = students[0].average;
+    float class_sum = 0;
+    for (int i = 0; i < num_stu; i++)
+    {
+        if (students[i].average > max_avg)
+        {
+            max_avg = students[i].average;
+        }
+        if (students[i].average < min_avg)
+        {
+            min_avg = students[i].average;
+        }
+        class_sum += students[i].average;
+    }
+    float class_avg = class_sum / num_stu;
+    printf("\n========== CLASS STATISTICS ==========\n");
+    printf("Highest Average   : %.2f\n", max_avg);
+    printf("Lowest Average    :  %.2f\n", min_avg);
+    printf("Class Average     :   %.2f\n", class_avg);
+    printf("=====================================\n");
+}
