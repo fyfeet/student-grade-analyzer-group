@@ -161,3 +161,42 @@ void Individual(struct Student students[])
         printf("Student with id %d is not found\n", search_Id);
     }
 }
+
+//===============================
+//         Peijing
+//===============================
+void Allresults(struct Student students[])
+{
+
+    if (num_stu == 0)
+    {
+        printf("\nNo student yet\n");
+        return;
+    }
+
+    printf("\n================GRADING RESULTS================\n");
+    printf("ID\tName\t\tTotal score\t\tAverage\tGrade\n");
+    for (int i = 0; i < num_stu; i++)
+    {
+        float total = 0;
+        char temp[10];
+
+        for (int j = 0; j < num_sub; j++)
+        {
+            total += students[i].marks[j];
+            sprintf(temp, "%.2f", students[i].marks[j]);
+            
+        }
+
+        students[i].average = total / num_sub;
+
+        students[i].grade = getgrade(students[i].average);
+
+        printf("%d\t%s\t\t%.2f\t\t\t%.2f\t%c\n",
+               students[i].id,
+               students[i].name,
+               students[i].total,
+               students[i].average,
+               students[i].grade);
+    }
+}
